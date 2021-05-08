@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Morta</string>
+    <string name="action_settings" translatable="false">Настройки</string>
+    <string name="applications" translatable="false">Приложения</string>
+    <string name="application_name" translatable="false">Имя приложения</string>
+    <string name="application_type" translatable="false">Тип приложения</string>
+</resources>

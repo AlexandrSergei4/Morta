@@ -1,22 +1,21 @@
 package com.alki.morta.ui.applist
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.alki.morta.domain.MortaAppSensitive
+import com.alki.morta.domain.MortaApp
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<MortaAppSensitive>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<MortaApp>?) {
     val adapter = recyclerView.adapter as ApplistAdapter
     adapter.submitList(data)
 }
 
 
 @BindingAdapter("mortaApp")
-fun bindRecyclerView(imageVeiw: ImageView, mortaApp: MortaAppSensitive?) {
+fun bindRecyclerView(imageVeiw: ImageView, mortaApp: MortaApp?) {
     val context = imageVeiw.context!!
     val pm = context.packageManager!!
     if (mortaApp != null)
@@ -28,12 +27,12 @@ fun bindRecyclerView(imageVeiw: ImageView, mortaApp: MortaAppSensitive?) {
 }
 
 @BindingAdapter("mortaApp")
-fun bindRecyclerView(textView: TextView, mortaApp: MortaAppSensitive?) {
+fun bindRecyclerView(textView: TextView, mortaApp: MortaApp?) {
     val context = textView.context!!
     val pm = context.packageManager!!
     if (mortaApp != null)
     {
-        val severityLevel = mortaApp.severityLevel
+        val severityLevel = mortaApp.threatTypes.sumBy { it.severityLevel }
         textView.text = severityLevel.toString()
         when (severityLevel){
             3 -> textView.setTextColor(Color.parseColor("#FFA812"))

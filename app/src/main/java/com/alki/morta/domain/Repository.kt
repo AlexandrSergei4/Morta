@@ -1,55 +1,98 @@
 package com.alki.morta.domain
 
 import android.content.Context
+import android.content.pm.ActivityInfo
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.alki.morta.db.SensitiveAppDb
-import com.alki.morta.db.asDomainModel
-import com.alki.morta.db.getDatabase
+import androidx.room.Transaction
 import com.alki.morta.network.Remote
-import com.alki.morta.threatStringToMask
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import android.content.pm.PackageManager
-import android.util.Log
-import com.alki.morta.network.MortaAppSensitiveDto
-import timber.log.Timber
+import com.alki.morta.db.*
+import retrofit2.HttpException
 
 class AppRepository(private val context: Context) {
     private val database = getDatabase(context)
     private val packageManager = context.packageManager;
+    private val threatTypes = database.dao.getThreatTypes()
+//    val mortaApps: LiveData<List<MortaApp>> = Transformations.map(
+//        database.dao.getMortaApps(){}
+fun getInstalledMortaApps(activityInfos: Map<String, ActivityInfo>): LiveData<List<MortaApp>> {
+    val threatTypesMap = threatTypes.value?.map { it.mask to ThreatType(it.threatName, it.severityLevel) }
+    return Transformations.map(database.dao.getMortaAppsIn(activityInfos.map { it.key }))
+    { list ->
+        list.map {
+            MortaApp(
+                it.activityName,
+                activityInfos.get(it.activityName)!!.loadLabel(packageManager).toString(),
+                it.description,
+                it.threatTypesMask,
+                threatTypesMap?.filter { pair -> it.threatTypesMask and pair.first == pair.first }
+                    ?.map { pair -> pair.second }!!,
+                it.email,
+                it.phone,
+                it.howBlockInfo
+            )
+        }
+    }
+}
     suspend fun refresh() {
         withContext(Dispatchers.IO) {
-            val apps = Remote.mortaService.getSensitiveApps()
-            val installedApps = ArrayList<SensitiveAppDb>()
-            Log.d("REPOSITORY","REMOTE SIZE ${apps.size}")
-            apps.iterator().forEach {
-                try {
-                    Log.d("PROCESSING", "ActivityName = ${it.activityName}")
-                    installedApps.add(SensitiveAppDb(
-                            it.activityName,
-                            packageManager.getApplicationInfo(it.activityName, 0).loadLabel(packageManager).toString(),
-                            it.description,
-                            threatStringToMask(it.threatTypes),
-                            it.severityLevel,
-                            it.email,
-                            it.phone,
-                            it.howBlockInfo
-                    ))
-                } catch (e: PackageManager.NameNotFoundException) {
-                    //noop
-                    Log.e("PROCESSING", "Cant find activity ${e.localizedMessage}")
+            refreshFromInternet()
+            refreshLocalApps()
+        }
+
+    }
+    @Transaction
+    private suspend fun refreshFromInternet(){
+        val currentDataVersion = database.dao.getCurrentVersion();
+        try {
+            Toast.makeText(
+                context,
+                "Проверка обновлений . . .",
+                Toast.LENGTH_LONG
+            ).show()
+            val remoteVersion = Remote.mortaService.getAppVersion()
+            if (currentDataVersion < remoteVersion) {
+                val threatTypes = Remote.mortaService.getThreatTypes().map {
+                    ThreatTypeDb(
+                        it.mask,
+                        it.localizedName,
+                        it.severityLevel
+                    )
                 }
+                database.dao.insertThreatTypes(threatTypes)
+                val mortaApps = Remote.mortaService.getSensitiveApps().map {
+                    MortaAppDb(
+                        it.activityName,
+                        it.description,
+                        it.threatTypesMask,
+                        it.email,
+                        it.phone,
+                        it.howBlockInfo,
+                    )
+                }
+                database.dao.insertMortaApps(mortaApps)
+                database.dao.insertVersion(ApplicationDataVersion(remoteVersion))
             }
-            Log.d("REPOSITORY","PROCESSED SIZE ${installedApps.size}")
-            database.sensitiveAppDao.insertAll(installedApps)
-            val dbsize = database.sensitiveAppDao.getAllSensitiveApp().value
-            Timber.d("DB SIZE : $dbsize")
-            Log.d("Repository", "DB SIZE : $dbsize")
+        } catch (e: HttpException) {
+            Toast.makeText(
+                context,
+                "Не удалось получить данные, проверте подключение к интернету.",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
-    val apps: LiveData<List<MortaAppSensitive>> = Transformations.map(
-            database.sensitiveAppDao.getAllSensitiveApp()
-    ) { it.asDomainModel() }
+    private fun refreshLocalApps(){
+        Toast.makeText(
+            context,
+            "Получение списка установленных приложений . . . ",
+            Toast.LENGTH_LONG
+        ).show()
+//        val installedApps = packageManager.getInstalledApplications()
+
+    }
+
 }

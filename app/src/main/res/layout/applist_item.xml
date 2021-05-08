@@ -6,7 +6,7 @@
     <data>
         <variable
             name="mortaApp"
-            type="com.alki.morta.domain.MortaAppSensitive" />
+            type="com.alki.morta.domain.MortaApp" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -3,12 +3,19 @@ package com.alki.morta.network
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class MortaAppSensitiveDto(
+data class MortaAppDto(
         val activityName: String,
         val description: String,
-        val threatTypes: String,
-        val severityLevel: Int,
+        val threatTypesMask: Int,
         val email: String,
         val phone: String,
         val howBlockInfo: String
+)
+
+@JsonClass(generateAdapter = true)
+data class ThreatTypeDto(
+        val mask: Int,
+        val name: String,
+        val localizedName: String,
+        val severityLevel: Int
 )

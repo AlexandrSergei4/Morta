@@ -5,17 +5,32 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface SensitiveAppDao{
-    @Query("select * from sensitiveappdb")
-    fun getAllSensitiveApp():LiveData<List<SensitiveAppDb>>
+interface MortaDao{
+    @Query("select * from MortaAppDb")
+    fun getMortaApps():LiveData<List<MortaAppDb>>
+
+    @Query("select * from MortaAppDb where activityName in (:activityNames)")
+    fun getMortaAppsIn(activityNames:List<String>):LiveData<List<MortaAppDb>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(appList:List<SensitiveAppDb>)
+    fun insertMortaApps(appList:List<MortaAppDb>)
+
+    @Query("select * from ThreatTypeDb")
+    fun getThreatTypes():LiveData<List<ThreatTypeDb>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertThreatTypes(appList:List<ThreatTypeDb>)
+
+    @Query("select max(version) from ApplicationDataVersion")
+    fun getCurrentVersion():Int
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertVersion(version:ApplicationDataVersion)
 }
 
-@Database(entities = [SensitiveAppDb::class], version = 1)
+@Database(entities = [MortaAppDb::class], version = 1)
 abstract class SensitiveAppDatabase:RoomDatabase(){
-    abstract val sensitiveAppDao:SensitiveAppDao
+    abstract val dao:MortaDao
 }
 
 private lateinit var INSTANCE:SensitiveAppDatabase

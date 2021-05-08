@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alki.morta.databinding.ApplistItemBinding
-import com.alki.morta.domain.MortaAppSensitive
+import com.alki.morta.domain.MortaApp
 
 class ApplistAdapter :
-    ListAdapter<MortaAppSensitive, ApplistAdapter.MortaAppViewHolder>(ApplistDiffCallback()) {
+    ListAdapter<MortaApp, ApplistAdapter.MortaAppViewHolder>(ApplistDiffCallback()) {
 
     class MortaAppViewHolder(private var binding: ApplistItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(mortaApp: MortaAppSensitive) {
+        fun bind(mortaApp: MortaApp) {
             binding.mortaApp = mortaApp
         }
     }
@@ -31,12 +31,12 @@ class ApplistAdapter :
 }
 
 
-class ApplistDiffCallback:DiffUtil.ItemCallback<MortaAppSensitive>(){
-    override fun areItemsTheSame(oldItem: MortaAppSensitive, newItem: MortaAppSensitive): Boolean {
+class ApplistDiffCallback:DiffUtil.ItemCallback<MortaApp>(){
+    override fun areItemsTheSame(oldItem: MortaApp, newItem: MortaApp): Boolean {
         return oldItem.activityName == newItem.activityName
     }
 
-    override fun areContentsTheSame(oldItem: MortaAppSensitive, newItem: MortaAppSensitive): Boolean {
+    override fun areContentsTheSame(oldItem: MortaApp, newItem: MortaApp): Boolean {
         return oldItem == newItem
     }
 }

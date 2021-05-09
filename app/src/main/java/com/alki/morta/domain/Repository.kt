@@ -16,8 +16,7 @@ class AppRepository(private val context: Context) {
     private val database = getDatabase(context)
     private val packageManager = context.packageManager;
     private val threatTypes = database.dao.getThreatTypes()
-//    val mortaApps: LiveData<List<MortaApp>> = Transformations.map(
-//        database.dao.getMortaApps(){}
+
 fun getInstalledMortaApps(activityInfos: Map<String, ActivityInfo>): LiveData<List<MortaApp>> {
     val threatTypesMap = threatTypes.value?.map { it.mask to ThreatType(it.threatName, it.severityLevel) }
     return Transformations.map(database.dao.getMortaAppsIn(activityInfos.map { it.key }))

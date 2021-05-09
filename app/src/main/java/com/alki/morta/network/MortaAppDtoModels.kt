@@ -9,7 +9,8 @@ data class MortaAppDto(
         val threatTypesMask: Int,
         val email: String,
         val phone: String,
-        val howBlockInfo: String
+        val howBlockInfo: String,
+        val howRestoreInfo: String
 )
 
 @JsonClass(generateAdapter = true)

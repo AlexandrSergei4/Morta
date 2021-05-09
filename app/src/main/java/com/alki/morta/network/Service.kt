@@ -7,7 +7,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
 interface MortaAppService{
-    @GET(".")
+    @GET("/morta_apps")
     suspend fun getSensitiveApps() : List<MortaAppDto>
 
     @GET("/version")

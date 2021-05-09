@@ -29,9 +29,9 @@
             android:id="@+id/app_type_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{mortaApp.threatTypes, default=`Threat types`}"
             app:layout_constraintStart_toStartOf="@+id/app_name_text"
-            app:layout_constraintTop_toBottomOf="@+id/app_name_text" />
+            app:layout_constraintTop_toBottomOf="@+id/app_name_text"
+            app:mortaAppThreatTypes="@{mortaApp}"/>
 
         <TextView
             android:id="@+id/app_severity_lvl"
@@ -42,7 +42,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:mortaApp="@{mortaApp}" />
+            app:mortaAppSeverityLevel="@{mortaApp}" />
 
         <FrameLayout
             android:id="@id/app_icon_container"

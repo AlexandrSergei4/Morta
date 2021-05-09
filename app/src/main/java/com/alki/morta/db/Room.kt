@@ -28,7 +28,7 @@ interface MortaDao{
     fun insertVersion(version:ApplicationDataVersion)
 }
 
-@Database(entities = [MortaAppDb::class], version = 1)
+@Database(entities = [MortaAppDb::class, ThreatTypeDb::class, ApplicationDataVersion::class], version = 1)
 abstract class SensitiveAppDatabase:RoomDatabase(){
     abstract val dao:MortaDao
 }

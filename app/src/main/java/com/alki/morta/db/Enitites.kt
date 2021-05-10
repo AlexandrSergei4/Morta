@@ -20,6 +20,19 @@ data class MortaAppDb(
     val howBlockInfo: String)
 
 @Entity
+data class MortaInstalledAppDb(
+    @PrimaryKey
+    val activityName: String,
+    val applicationName: String,
+    val description: String,
+    val threatTypesMask: Int,
+    val threatTypes: String,
+    val severityLevel: Int,
+    val email: String,
+    val phone: String,
+    val howBlockInfo: String)
+
+@Entity
 data class ApplicationDataVersion(
     @PrimaryKey
     val version: Int)

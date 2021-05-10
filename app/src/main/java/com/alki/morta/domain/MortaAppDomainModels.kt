@@ -4,8 +4,8 @@ data class MortaApp(
         val activityName: String,
         val applicationName:String,
         val description: String,
-        val mask:Int,
-        val threatTypes: List<ThreatType>,
+        val threatTypes: String,
+        val severityLevel: Int,
         val email: String,
         val phone: String,
         val howBlockInfo: String)

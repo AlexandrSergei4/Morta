@@ -31,22 +31,15 @@ fun bindRecyclerView(textView: TextView, mortaApp: MortaApp?) {
     val context = textView.context!!
     if (mortaApp != null)
     {
-        val severityLevel = mortaApp.threatTypes.sumBy { it.severityLevel }
+        val severityLevel = mortaApp.severityLevel
         textView.text = severityLevel.toString()
-        when (severityLevel){
-            3 -> textView.setTextColor(Color.parseColor("#FFA812"))
-            4 -> textView.setTextColor(Color.parseColor("#FF7518"))
-            5 -> textView.setTextColor(Color.parseColor("#FF2B2B"))
-        }
+            if (severityLevel > 3) textView.setTextColor(Color.parseColor("#FFA812"))
+            if (severityLevel > 4) textView.setTextColor(Color.parseColor("#FF7518"))
+            if (severityLevel > 5) textView.setTextColor(Color.parseColor("#FF2B2B"))
     }
 }
 
 @BindingAdapter("mortaAppThreatTypes")
 fun bindThreatTypeRecyclerView(textView: TextView, mortaApp: MortaApp?) {
-    val context = textView.context!!
-    if (mortaApp != null)
-    {
-        val threatTypes = mortaApp.threatTypes.map { it.threatName }.reduce { acc, s -> acc+s }
-        textView.text = threatTypes
-    }
+    textView.text = mortaApp?.threatTypes
 }

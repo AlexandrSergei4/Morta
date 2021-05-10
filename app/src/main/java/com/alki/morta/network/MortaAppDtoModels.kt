@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 data class MortaAppDto(
         val activityName: String,
         val description: String,
-        val threatTypesMask: Int,
+        val threatTypeMask: Int,
         val email: String,
         val phone: String,
         val howBlockInfo: String,

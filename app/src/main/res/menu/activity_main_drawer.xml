@@ -2,12 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
-    <group android:checkableBehavior="single">
+        <group>
+                <item
+                    android:id="@+id/sensitiveApps"
+                    android:title="@string/sensitive_applications" />
+                <item
+                    android:id="@+id/installedApps"
+                    android:title="@string/installed_applications" />
+        </group>
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/applications" />
-
-    </group>
+            android:id="@+id/settingsFragment"
+            android:title="@string/settings" />
 </menu>

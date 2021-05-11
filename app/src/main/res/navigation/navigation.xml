@@ -3,12 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_applist">
+    app:startDestination="@id/sensitiveApps">
 
     <fragment
-        android:id="@+id/fragment_applist"
+        android:id="@+id/sensitiveApps"
         android:name="com.alki.morta.ui.applist.ApplistFragment"
-        android:label="@string/applications"
-        tools:layout="@layout/fragment_applist" />
+        android:label="@string/sensitive_applications"
+        tools:layout="@layout/fragment_applist"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.alki.morta.ui.SettingsFragment"
+        android:label="@string/settings"/>
+    <fragment
+        android:id="@+id/installedApps"
+        android:name="com.alki.morta.InstalledApps"
+        android:label="@string/installed_applications"
+        tools:layout="@layout/installed_apps_fragment" />
 
 </navigation>

@@ -3,9 +3,12 @@ package com.alki.morta.ui.applist
 import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.alki.morta.domain.App
 import com.alki.morta.domain.MortaApp
+import com.alki.morta.ui.InstalledAppsAdapter
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<MortaApp>?) {
@@ -13,6 +16,11 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<MortaApp>?) {
     adapter.submitList(data)
 }
 
+@BindingAdapter("installedAppList")
+fun bindInstalledAppList(recyclerView: RecyclerView, data: List<App>?) {
+    val adapter = recyclerView.adapter as InstalledAppsAdapter
+    adapter.submitList(data)
+}
 
 @BindingAdapter("mortaApp")
 fun bindRecyclerView(imageVeiw: ImageView, mortaApp: MortaApp?) {
@@ -42,4 +50,13 @@ fun bindRecyclerView(textView: TextView, mortaApp: MortaApp?) {
 @BindingAdapter("mortaAppThreatTypes")
 fun bindThreatTypeRecyclerView(textView: TextView, mortaApp: MortaApp?) {
     textView.text = mortaApp?.threatTypes
+}
+
+@BindingAdapter("appIcon")
+fun bindAppIconRecyclerView(imageVeiw: ImageView, app: App?) {
+    val context = imageVeiw.context!!
+    val pm = context.packageManager!!
+
+    if (app != null)
+        imageVeiw.setImageDrawable(pm.getApplicationIcon(app.activityName))
 }

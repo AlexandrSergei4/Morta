@@ -40,10 +40,23 @@ interface MortaDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertVersion(version:ApplicationDataVersion)
 }
+@Dao
+interface InstalledAppsDao {
+    @Query("select * from InstalledAppDb")
+    fun getAll():List<InstalledAppDb>
 
-@Database(entities = [MortaAppDb::class, MortaInstalledAppDb::class, ThreatTypeDb::class, ApplicationDataVersion::class], version = 1)
+    @Query("select * from InstalledAppDb")
+    fun getAllLiveData():LiveData<List<InstalledAppDb>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertAll(appList:List<InstalledAppDb>)
+}
+
+
+@Database(entities = [MortaAppDb::class, MortaInstalledAppDb::class, ThreatTypeDb::class, ApplicationDataVersion::class, InstalledAppDb::class], version = 1)
 abstract class SensitiveAppDatabase:RoomDatabase(){
     abstract val dao:MortaDao
+    abstract val installedAppsDao:InstalledAppsDao
 }
 
 private lateinit var INSTANCE:SensitiveAppDatabase

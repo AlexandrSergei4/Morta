@@ -33,6 +33,14 @@ data class MortaInstalledAppDb(
     val howBlockInfo: String)
 
 @Entity
+data class InstalledAppDb(
+    @PrimaryKey
+    val activityName: String,
+    val applicationName: String,
+    val iconResource: Int)
+
+
+@Entity
 data class ApplicationDataVersion(
     @PrimaryKey
     val version: Int)

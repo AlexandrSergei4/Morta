@@ -1,11 +1,13 @@
 package com.alki.morta
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.alki.morta.databinding.InstalledAppsFragmentBinding
+import com.alki.morta.ui.InstalledAppsAdapter
 
 class InstalledApps : Fragment() {
 
@@ -14,18 +16,23 @@ class InstalledApps : Fragment() {
     }
 
     private lateinit var viewModel: InstalledAppsViewModel
+    private lateinit var binding: InstalledAppsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.installed_apps_fragment, container, false)
+        binding = InstalledAppsFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.installedAppsRecycleView.adapter = InstalledAppsAdapter()
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(InstalledAppsViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this, InstalledAppsViewModel.Factory(requireActivity().application)).get(InstalledAppsViewModel::class.java)
+        binding.viewModel = viewModel
+
     }
 
 }

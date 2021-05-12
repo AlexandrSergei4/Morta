@@ -28,7 +28,6 @@ class ApplistFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.appItems.adapter = ApplistAdapter()
         applistViewModel.appList.observe(this, Observer {
-            Log.d("ViewModel", "APP SIZE ${it.size}")
             (binding.appItems.adapter as ApplistAdapter).submitList(it)
         })
         return binding.root

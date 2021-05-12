@@ -14,22 +14,20 @@ class AppRepository(private val context: Context) {
     private val database = getDatabase(context)
     private val packageManager = context.packageManager;
     val installedMortaApps = database.dao.getMortaInstalledApps()
+    val installedApps = database.installedAppsDao.getAllLiveData()
     private val getAppsIntent = Intent(Intent.ACTION_MAIN)
         .apply {
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
-    val installedApps = packageManager.queryIntentActivities(getAppsIntent, 0)
-        .mapNotNull {
-            it.activityInfo
-        }.map { it.packageName to it }.toMap()
 
     suspend fun refresh() {
+
         withContext(Dispatchers.IO) {
             refreshFromInternet()
             refreshLocalApps()
         }
-
     }
+
     @Transaction
     private suspend fun refreshFromInternet(){
         val currentDataVersion = database.dao.getCurrentVersion();
@@ -68,15 +66,25 @@ class AppRepository(private val context: Context) {
 
     private fun refreshLocalApps(){
         database.dao.clearMortaInstalledApps()
+        var installedApps = packageManager.queryIntentActivities(getAppsIntent, 0)
+            .mapNotNull {
+                InstalledAppDb(
+                    it.activityInfo.packageName,
+                    packageManager.getApplicationInfo(it.activityInfo.packageName, 0)
+                        .loadLabel(packageManager).toString(),
+                    it.iconResource
+                )
+            }
+        database.installedAppsDao.insertAll(installedApps)
         val threatTypesMap = database.dao.getThreatTypes().map{
             it.mask to ThreatType(it.threatName, it.severityLevel)
         }.toMap()
-//        val installedApps = mutableListOf<MortaInstalledAppDb>()
-        val installedMortaApps = database.dao.getMortaAppsIn(installedApps.map { it.key }).map {
+        val installedAppsMap = installedApps.map { it.activityName to it }.toMap();
+        val installedMortaApps = database.dao.getMortaAppsIn(installedApps.map { it.activityName }).map {
             var threatAndSeverity = threatMaskToThreatsAndSeverity(it.threatTypesMask, threatTypesMap)
             MortaInstalledAppDb(
                 it.activityName,
-                packageManager.getApplicationInfo(it.activityName,0).loadLabel(packageManager).toString(),
+                installedAppsMap[it.activityName]?.applicationName!!,
                 it.description,
                 it.threatTypesMask,
                 threatAndSeverity.threat,

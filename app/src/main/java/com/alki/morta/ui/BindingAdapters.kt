@@ -3,6 +3,7 @@ package com.alki.morta.ui.applist
 import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -62,6 +63,10 @@ fun bindPackageNameImage(imageVeiw: ImageView, packageName: String?) {
 }
 
 @BindingAdapter( "mortaApps")
-fun bindProgressBar(view: View,  mortaApps: Any?) {
-    view.visibility = if (mortaApps != null) View.GONE else View.VISIBLE
-}
+fun bindProgressBar(progressBar: ProgressBar, data: List<MortaApp>?) {
+    if (data != null && data.isNotEmpty())
+        progressBar.visibility = View.GONE
+    else {
+        progressBar.visibility = View.VISIBLE
+    }
+    }

@@ -21,8 +21,8 @@
             android:id="@+id/loading_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:mortaApps = "@{viewModel.appList}"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            app:mortaApps = "@{viewModel.appList}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/app_items"

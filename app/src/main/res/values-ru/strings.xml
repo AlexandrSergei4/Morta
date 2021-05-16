@@ -2,9 +2,11 @@
 <resources>
     <string name="app_name">Morta</string>
     <string name="action_settings" translatable="false">Настройки</string>
-    <string name="installed_applications" translatable="false">Все установленные</string>
-    <string name="sensitive_applications" translatable="false">Содержащие опасные данные</string>
+    <string name="installed_applications" translatable="false">Все приложения</string>
+    <string name="sensitive_applications" translatable="false">Приложения с секретными данными</string>
     <string name="settings" translatable="false">Настройки</string>
     <string name="application_name" translatable="false">Имя приложения</string>
     <string name="application_type" translatable="false">Тип приложения</string>
+    <string name="how_to_restore_label">Как восстановить доступ</string>
+    <string name="application_icon">Иконув приложения</string>
 </resources>

@@ -3,21 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/sensitiveApps">
+    app:startDestination="@id/installedMortaApps">
 
     <fragment
-        android:id="@+id/sensitiveApps"
-        android:name="com.alki.morta.ui.applist.ApplistFragment"
+        android:id="@+id/installedMortaApps"
+        android:name="com.alki.morta.ui.mortaapps.MortaAppsFragment"
         android:label="@string/sensitive_applications"
-        tools:layout="@layout/fragment_applist"/>
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.alki.morta.ui.SettingsFragment"
-        android:label="@string/settings"/>
+        tools:layout="@layout/morta_apps_fragment">
+        <action
+            android:id="@+id/action_sensitiveApps_to_appDetailFragment"
+            app:destination="@id/appDetailFragment">
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/installedApps"
-        android:name="com.alki.morta.InstalledApps"
+        android:name="com.alki.morta.ui.installedapps.InstalledAppsFragment"
         android:label="@string/installed_applications"
-        tools:layout="@layout/installed_apps_fragment" />
+        tools:layout="@layout/installed_apps_fragment" >
+        <action
+            android:id="@+id/action_installedApps_to_appDetailFragment"
+            app:destination="@id/appDetailFragment">
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/appDetailFragment"
+        android:name="com.alki.morta.ui.appdetail.AppDetailFragment"
+        android:label="AppDetailFragment" >
+        <argument android:name="package_name"
+            app:argType="java.lang.String"/>
+
+    </fragment>
 
 </navigation>

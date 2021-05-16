@@ -8,7 +8,7 @@ import retrofit2.http.GET
 
 interface MortaAppService{
     @GET("/morta_apps")
-    suspend fun getSensitiveApps() : List<MortaAppDto>
+    suspend fun getMortaApps() : List<MortaAppDto>
 
     @GET("/version")
     suspend fun getAppVersion() : Int

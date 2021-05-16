@@ -1,15 +1,22 @@
 package com.alki.morta
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import com.alki.morta.databinding.ActivityMainBinding
+import com.alki.morta.domain.AppRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,15 +25,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("MainACtivity", "main activity on create");
+
+        val repository = AppRepository(application.applicationContext)
+        CoroutineScope(Dispatchers.Default).launch {
+            repository.refresh()
+
+        }
+        Log.d("MainACtivity","Repository initialized")
         val binding =
             DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        Log.d("MainACtivity","Initializing nachost")
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         drawerLayout = binding.drawerLayout
+        Log.d("MainACtivity","initializing nav view")
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
-
+        Log.d("MainACtivity","nav view initialized")
     }
 
     override fun onSupportNavigateUp(): Boolean {

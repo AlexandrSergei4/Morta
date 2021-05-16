@@ -4,7 +4,7 @@
     tools:showIn="navigation_view">
         <group>
                 <item
-                    android:id="@+id/sensitiveApps"
+                    android:id="@+id/installedMortaApps"
                     android:title="@string/sensitive_applications" />
                 <item
                     android:id="@+id/installedApps"

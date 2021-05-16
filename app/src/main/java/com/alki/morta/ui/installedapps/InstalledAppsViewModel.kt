@@ -1,27 +1,31 @@
-package com.alki.morta
+package com.alki.morta.ui.installedapps
 
 import android.app.Application
 import androidx.lifecycle.*
 import com.alki.morta.domain.App
 import com.alki.morta.domain.AppRepository
-import com.alki.morta.domain.MortaApp
-import com.alki.morta.ui.applist.ApplistViewModel
 
 class InstalledAppsViewModel(application: Application) : AndroidViewModel(application) {
-    // TODO: Implement the ViewModel
+
+    private val _navigateToMortaAppDetail= MutableLiveData<String>()
+    val navigateToMortaAppDetail get() = _navigateToMortaAppDetail
+
     private val repository = AppRepository(application.applicationContext)
     private var _installedAppList  = Transformations.map(repository.installedApps)
     {
         it.map {
             App(
-                it.activityName,
-                it.applicationName,
-                it.iconResource
+                it.packageName,
+                it.applicationName
             )
         }
     }
     val installedAppList: LiveData<List<App>>
         get() = _installedAppList
+
+    fun onClickAppItem(app_package:String){
+        _navigateToMortaAppDetail.value = app_package
+    }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

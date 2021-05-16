@@ -12,17 +12,18 @@ data class ThreatTypeDb(
 @Entity
 data class MortaAppDb(
     @PrimaryKey
-    val activityName: String,
+    val packageName: String,
     val description: String,
     val threatTypesMask: Int,
     val email: String,
     val phone: String,
-    val howBlockInfo: String)
+    val howBlockInfo: String,
+    val howRestoreInfo: String)
 
 @Entity
-data class MortaInstalledAppDb(
+data class InstalledMortaAppDb(
     @PrimaryKey
-    val activityName: String,
+    val packageName: String,
     val applicationName: String,
     val description: String,
     val threatTypesMask: Int,
@@ -30,14 +31,14 @@ data class MortaInstalledAppDb(
     val severityLevel: Int,
     val email: String,
     val phone: String,
-    val howBlockInfo: String)
+    val howBlockInfo: String,
+    val howRestoreInfo: String)
 
 @Entity
 data class InstalledAppDb(
     @PrimaryKey
-    val activityName: String,
-    val applicationName: String,
-    val iconResource: Int)
+    val packageName: String,
+    val applicationName: String)
 
 
 @Entity

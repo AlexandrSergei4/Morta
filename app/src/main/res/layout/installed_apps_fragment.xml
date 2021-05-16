@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.alki.morta.InstalledAppsViewModel" />
+            type="com.alki.morta.ui.installedapps.InstalledAppsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.applist.ApplistFragment">
+        tools:context=".ui.mortaapps.MortaAppsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/installedAppsRecycleView"
@@ -23,6 +23,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:installedAppList="@{viewModel.installedAppList}" />
+            app:installedAppRecycleList="@{viewModel.installedAppList}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

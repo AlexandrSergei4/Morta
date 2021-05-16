@@ -15,6 +15,7 @@ data class MortaAppDto(
 
 @JsonClass(generateAdapter = true)
 data class ThreatTypeDto(
+        val id:   Int,
         val mask: Int,
         val name: String,
         val localizedName: String,

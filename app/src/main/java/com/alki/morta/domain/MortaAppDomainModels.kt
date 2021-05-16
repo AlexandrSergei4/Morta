@@ -1,19 +1,19 @@
 package com.alki.morta.domain
 
 data class MortaApp(
-        val activityName: String,
+        val packageName: String,
         val applicationName:String,
         val description: String,
         val threatTypes: String,
         val severityLevel: Int,
         val email: String,
         val phone: String,
-        val howBlockInfo: String)
+        val howBlockInfo: String,
+        val howRestoreInfo: String)
 
 data class App(
-        val activityName: String,
-        val applicationName:String,
-        val iconResource: Int)
+        val packageName: String,
+        val applicationName:String)
 
 data class ThreatType(
         val threatName: String,

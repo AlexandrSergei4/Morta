@@ -1,4 +1,4 @@
-package com.alki.morta.ui
+package com.alki.morta.ui.installedapps
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alki.morta.databinding.InstalledAppItemBinding
 import com.alki.morta.domain.App
-import com.alki.morta.domain.MortaApp
+import com.alki.morta.ui.appdetail.AppClickListener
 
-class InstalledAppsAdapter :
+class InstalledAppsAdapter(private val clickListener: AppClickListener) :
     ListAdapter<App, InstalledAppsAdapter.AppViewHolder>(ApplistDiffCallback()) {
 
     class AppViewHolder(private var binding: InstalledAppItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(app: App) {
+        fun bind(app: App, clickListener: AppClickListener) {
             binding.app = app
         }
     }
@@ -27,14 +27,14 @@ class InstalledAppsAdapter :
     }
 
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickListener)
     }
 }
 
 
 class ApplistDiffCallback:DiffUtil.ItemCallback<App>(){
     override fun areItemsTheSame(oldItem: App, newItem: App): Boolean {
-        return oldItem.activityName == newItem.activityName
+        return oldItem.packageName == newItem.packageName
     }
 
     override fun areContentsTheSame(oldItem: App, newItem: App): Boolean {

@@ -1,33 +1,12 @@
 <resources>
     <string name="app_name">Morta</string>
-    <string name="title_activity_morta">MortaActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="installed_applications" translatable="false">All Installed</string>
-    <string name="sensitive_applications" translatable="false">With Sensitive data</string>
+    <string name="installed_applications" translatable="false">Installed apps</string>
+    <string name="sensitive_applications" translatable="false">Apps with sensitive data</string>
     <string name="settings" translatable="false">Settings</string>
     <string name="application_name" translatable="false">Application Name</string>
     <string name="application_type" translatable="false">Application Type</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="how_to_restore_label">How to restore access</string>
+    <string name="application_icon">Application Icon</string>
 </resources>

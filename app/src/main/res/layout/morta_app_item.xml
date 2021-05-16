@@ -10,6 +10,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -27,11 +28,14 @@
 
         <TextView
             android:id="@+id/app_type_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="Threat types"
+            app:layout_constraintEnd_toStartOf="@+id/app_severity_lvl"
             app:layout_constraintStart_toStartOf="@+id/app_name_text"
             app:layout_constraintTop_toBottomOf="@+id/app_name_text"
-            app:mortaAppThreatTypes="@{mortaApp}"/>
+            app:mortaAppThreatTypesText="@{mortaApp}"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/app_severity_lvl"
@@ -42,7 +46,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:mortaAppSeverityLevel="@{mortaApp}" />
+            app:mortaAppSeverityLevelText="@{mortaApp}" />
 
         <FrameLayout
             android:id="@id/app_icon_container"
@@ -59,7 +63,7 @@
                 android:id="@+id/app_icon"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
-                app:mortaApp="@{mortaApp}" />
+                app:packageNameImage="@{mortaApp.packageName}" />
 
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

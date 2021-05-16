@@ -72,18 +72,16 @@ class AppRepository(private val context: Context) {
                 database.versionDao.insert(ApplicationDataVersion(remoteVersion))
             }
         } catch (e: IOException) {
-            Toast.makeText(context, "Не удается получить данные. Проверьте подключение к интернету",Toast.LENGTH_LONG).show()
-        }catch (e: HttpException){
-            when (e) {
-                is HttpException -> {
-                    Toast.makeText(
-                        context,
-                        "Не удалось получить данные, проверте подключение к интернету.",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                else -> throw e
-            }
+            Toast.makeText(
+                context, "Не удается получить данные. Проверьте подключение к интернету.",
+                Toast.LENGTH_LONG
+            ).show()
+        } catch (e: HttpException) {
+            Toast.makeText(
+                context,
+                "Не удалось получить данные. Проверьте подключение к интернету.",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 

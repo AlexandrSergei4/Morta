@@ -1,8 +1,11 @@
 package com.alki.morta
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -27,9 +30,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val repository = AppRepository(application.applicationContext)
-        CoroutineScope(Dispatchers.Default).launch {
-            repository.refresh()
+        val cm =
+            application.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (cm.isActiveNetworkMetered()) {
+            CoroutineScope(Dispatchers.Default).launch {
+                repository.refresh()
 
+            }
+        } else {
+            Toast.makeText(
+                application.applicationContext,
+                "Отсутствует подключение к интернету, приложение работает в оффлайн режиме",
+                Toast.LENGTH_LONG
+            ).show()
         }
         val binding =
             DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)

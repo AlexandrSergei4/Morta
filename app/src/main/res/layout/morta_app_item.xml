@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:text="@{mortaApp.applicationName, default=`Application Name`}"
+            android:text="@{mortaApp.applicationName}"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/app_icon_container"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,6 @@
             android:id="@+id/app_type_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Threat types"
             app:layout_constraintEnd_toStartOf="@+id/app_severity_lvl"
             app:layout_constraintStart_toStartOf="@+id/app_name_text"
             app:layout_constraintTop_toBottomOf="@+id/app_name_text"

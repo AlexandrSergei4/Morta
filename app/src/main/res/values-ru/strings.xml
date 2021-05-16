@@ -7,7 +7,7 @@
     <string name="settings" translatable="false">Настройки</string>
     <string name="application_name" translatable="false">Имя приложения</string>
     <string name="application_type" translatable="false">Тип приложения</string>
-    <string name="how_to_restore_label">Как восстановить доступ</string>
+    <string name="how_to_restore_label">Как восстановить доступ:</string>
     <string name="application_icon">Иконка приложения</string>
     <string name="application_details">Сведения о приложении</string>
 </resources>

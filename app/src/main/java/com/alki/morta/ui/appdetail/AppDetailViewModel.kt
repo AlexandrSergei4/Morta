@@ -10,6 +10,7 @@ class AppDetailViewModel(val app: Application, val packageName: String) : Androi
     var hasSecurityInfo = MutableLiveData<Boolean>()
     val mortaAppDb = db.installedMortaAppsDao.getById(packageName)
     val installedAppDb = db.installedAppsDao.getById(packageName)
+    val allThreatTypes = db.threatTypesDao.getAllLiveData()
 
 
     class Factory(val app: Application, private val packageName: String) : ViewModelProvider.Factory {

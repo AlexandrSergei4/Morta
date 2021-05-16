@@ -19,7 +19,6 @@ class AppDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("AppDetailFragment","onCreateView")
         binding = AppDetailFragmentBinding.inflate(inflater, container,false)
         val packageName = AppDetailFragmentArgs.fromBundle(requireArguments()).packageName
         viewModel = ViewModelProvider(this, AppDetailViewModel.Factory(requireActivity().application,packageName)).get(AppDetailViewModel::class.java)
@@ -28,7 +27,7 @@ class AppDetailFragment : Fragment() {
         Observer {
             if (it != null) {
                 setBaseAppProps(it.applicationName, it.packageName)
-                viewModel.hasSecurityInfo.value = false
+                binding.hasSecurityData.isChecked = false
             }
         })
 
@@ -36,11 +35,19 @@ class AppDetailFragment : Fragment() {
             Observer {
                 if (it != null) {
                     setBaseAppProps(it.applicationName, it.packageName)
-                    viewModel.hasSecurityInfo.value = true
+                    binding.hasSecurityData.isChecked= true
                     binding.howRestoreInfo.text = it.howRestoreInfo
                     binding.howToBlockInfo.text = it.howBlockInfo
+                    binding.threatTypes.selectedThreatTypes = it.threatTypes.split(",").map { it.trim() }
+
                 }
             })
+
+        viewModel.allThreatTypes.observe(viewLifecycleOwner,
+        Observer {
+            binding.threatTypes.allThreatTypes = it.map { it.threatName }
+        })
+
         return binding.root
     }
 

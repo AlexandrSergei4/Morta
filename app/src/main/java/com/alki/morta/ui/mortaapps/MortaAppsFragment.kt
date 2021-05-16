@@ -25,6 +25,7 @@ class MortaAppsFragment : Fragment() {
                 MortaAppsViewModel::class.java)
         val binding = MortaAppsFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         binding.appItems.adapter = MortaAppsListAdapter(AppClickListener {
             viewModel.onClickAppItem(it)
         })
@@ -41,9 +42,9 @@ class MortaAppsFragment : Fragment() {
                 }
             }
         )
-        viewModel.appList.observe(viewLifecycleOwner, Observer {
-            (binding.appItems.adapter as MortaAppsListAdapter).submitList(it)
-        })
+//        viewModel.appList.observe(viewLifecycleOwner, Observer {
+//            (binding.appItems.adapter as MortaAppsListAdapter).submitList(it)
+//        })
         return binding.root
     }
 }

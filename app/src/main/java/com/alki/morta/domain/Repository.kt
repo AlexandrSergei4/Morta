@@ -22,7 +22,13 @@ class AppRepository(private val context: Context) {
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
 
+    /**
+     * Установленные приложения с личными данными
+     */
     val installedMortaApps = database.installedMortaAppsDao.getAll()
+    /**
+     * Все установленные приложения
+     */
     val installedApps = database.installedAppsDao.getAllLiveData()
 
     suspend fun refresh() {
@@ -33,6 +39,9 @@ class AppRepository(private val context: Context) {
         }
     }
 
+    /**
+     * Получение данных с сервера
+     */
     @Transaction
     private suspend fun refreshFromInternet() {
         val currentDataVersion = database.versionDao.getCurrentVersion()
@@ -78,6 +87,9 @@ class AppRepository(private val context: Context) {
         }
     }
 
+    /**
+     * Получение установленных приложений
+     */
     private fun refreshLocalApps(){
         database.installedMortaAppsDao.clear()
         database.installedAppsDao.clear()

@@ -40,7 +40,6 @@ class MortaAppsViewModel(application: Application) : AndroidViewModel(applicatio
     }
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            Log.d("MortaAppsViewModel", "Creating view Model")
             if (modelClass.isAssignableFrom(MortaAppsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return MortaAppsViewModel(app) as T

@@ -25,25 +25,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("MainACtivity", "main activity on create");
 
         val repository = AppRepository(application.applicationContext)
         CoroutineScope(Dispatchers.Default).launch {
             repository.refresh()
 
         }
-        Log.d("MainACtivity","Repository initialized")
         val binding =
             DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        Log.d("MainACtivity","Initializing nachost")
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         drawerLayout = binding.drawerLayout
-        Log.d("MainACtivity","initializing nav view")
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
-        Log.d("MainACtivity","nav view initialized")
     }
 
     override fun onSupportNavigateUp(): Boolean {

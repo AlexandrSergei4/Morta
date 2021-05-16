@@ -9,4 +9,5 @@
     <string name="application_type" translatable="false">Application Type</string>
     <string name="how_to_restore_label">How to restore access</string>
     <string name="application_icon">Application Icon</string>
+    <string name="application_details">Application details</string>
 </resources>

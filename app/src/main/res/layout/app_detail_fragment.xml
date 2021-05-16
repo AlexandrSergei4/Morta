@@ -53,7 +53,7 @@
             android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
             android:text="Как заблокировать доступ:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/has_security_data" />
+            app:layout_constraintTop_toBottomOf="@+id/threatTypes" />
 
         <TextView
             android:id="@+id/how_to_block_info"
@@ -83,12 +83,24 @@
             app:layout_constraintStart_toStartOf="@+id/how_to_restore_info_label"
             app:layout_constraintTop_toBottomOf="@+id/how_to_restore_info_label" />
 
+        <com.alki.morta.ui.custom.ThreatTypesView
+            android:id="@+id/threatTypes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/has_security_data" />
         <CheckBox
             android:id="@+id/has_security_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Секретные данные"
+            android:text="Личные данные"
+            android:checked="@={viewModel.hasSecurityInfo}"
+            android:enabled="false"
             app:layout_constraintStart_toStartOf="@+id/app_icon"
             app:layout_constraintTop_toBottomOf="@+id/app_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>

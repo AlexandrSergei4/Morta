@@ -1,7 +1,7 @@
 package com.alki.morta.ui.applist
 
 import android.graphics.Color
-import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -59,4 +59,9 @@ fun bindPackageNameImage(imageVeiw: ImageView, packageName: String?) {
 
     if (packageName != null)
         imageVeiw.setImageDrawable(pm.getApplicationIcon(packageName))
+}
+
+@BindingAdapter( "mortaApps")
+fun bindProgressBar(view: View,  mortaApps: Any?) {
+    view.visibility = if (mortaApps != null) View.GONE else View.VISIBLE
 }

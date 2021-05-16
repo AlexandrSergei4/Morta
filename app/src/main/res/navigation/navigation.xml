@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.alki.morta.ui.appdetail.AppDetailFragment"
-        android:label="AppDetailFragment" >
+        android:label="@string/application_details" >
         <argument android:name="package_name"
             app:argType="java.lang.String"/>
 

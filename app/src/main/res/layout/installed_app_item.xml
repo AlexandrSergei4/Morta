@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:text="@{app.applicationName, default=`Application Name`}"
+            android:text="@{app.applicationName}"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/app_icon_container"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/app_name_text"
             app:layout_constraintTop_toBottomOf="@+id/app_name_text"
-            android:text="@{app.packageName, default=`Package Name`}"
+            android:text="@{app.packageName}"
             />
 
 

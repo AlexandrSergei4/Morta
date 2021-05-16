@@ -2,6 +2,9 @@ package com.alki.morta.db
 
 import androidx.room.*
 
+/**
+ * Хранение типов личной информации
+ */
 @Entity
 data class ThreatTypeDb(
     @PrimaryKey
@@ -9,6 +12,9 @@ data class ThreatTypeDb(
     val threatName: String,
     val severityLevel:Int)
 
+/**
+ * Хранение приложений содержащих личные данные
+ */
 @Entity
 data class MortaAppDb(
     @PrimaryKey
@@ -20,6 +26,9 @@ data class MortaAppDb(
     val howBlockInfo: String,
     val howRestoreInfo: String)
 
+/**
+ * Хранение установленных приложений содержащих личные данные
+ */
 @Entity
 data class InstalledMortaAppDb(
     @PrimaryKey
@@ -34,13 +43,18 @@ data class InstalledMortaAppDb(
     val howBlockInfo: String,
     val howRestoreInfo: String)
 
+/**
+ * Хранение установленных приложений
+ */
 @Entity
 data class InstalledAppDb(
     @PrimaryKey
     val packageName: String,
     val applicationName: String)
 
-
+/**
+ * Версия данных загружаемых с сервера
+ */
 @Entity
 data class ApplicationDataVersion(
     @PrimaryKey

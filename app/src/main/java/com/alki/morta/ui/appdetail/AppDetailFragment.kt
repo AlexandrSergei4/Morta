@@ -27,7 +27,6 @@ class AppDetailFragment : Fragment() {
         Observer {
             if (it != null) {
                 setBaseAppProps(it.applicationName, it.packageName)
-                binding.hasSecurityData.isChecked = false
             }
         })
 

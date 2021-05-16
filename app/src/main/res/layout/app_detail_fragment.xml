@@ -57,10 +57,12 @@
 
         <TextView
             android:id="@+id/how_to_block_info"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/how_to_block_info_label"
             app:layout_constraintTop_toBottomOf="@+id/how_to_block_info_label" />
 
@@ -76,10 +78,12 @@
 
         <TextView
             android:id="@+id/how_restore_info"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/how_to_restore_info_label"
             app:layout_constraintTop_toBottomOf="@+id/how_to_restore_info_label" />
 

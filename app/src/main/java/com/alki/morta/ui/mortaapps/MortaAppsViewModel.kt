@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class MortaAppsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _navigateToMortaAppDetail= MutableLiveData<String>()
+    private val _navigateToMortaAppDetail= MutableLiveData<String?>()
     val navigateToMortaAppDetail get() = _navigateToMortaAppDetail
 
     private val repository = AppRepository(application.applicationContext)

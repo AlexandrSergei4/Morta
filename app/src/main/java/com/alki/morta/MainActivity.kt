@@ -29,8 +29,9 @@ class MainActivity : AppCompatActivity() {
         val isConnected: Boolean
         val cm = application.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val repository = AppRepository(application.applicationContext)
+        @Suppress("DEPRECATION")
         if (android.os.Build.VERSION.SDK_INT < 23) {
-            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+            val activeNetwork = cm.activeNetworkInfo
             isConnected = activeNetwork?.isConnectedOrConnecting == true
         } else {
             var capabilities = cm.getNetworkCapabilities(cm.activeNetwork)

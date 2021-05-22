@@ -84,9 +84,16 @@ interface InstalledMortaAppsDao {
 
 }
 
-@Database(entities = [MortaAppDb::class, InstalledMortaAppDb::class,
-    ThreatTypeDb::class, ApplicationDataVersion::class,
-    InstalledAppDb::class], exportSchema = false, version = 1)
+@Database
+    (
+    entities = [MortaAppDb::class, InstalledMortaAppDb::class,
+        ThreatTypeDb::class, ApplicationDataVersion::class,
+        InstalledAppDb::class],
+    version = 2,
+    autoMigrations = [
+        AutoMigration(from = 1,to = 2)
+    ]
+)
 abstract class MortaDatabase:RoomDatabase(){
     abstract val mortaAppsDao:MortaAppsDao
     abstract val installedMortaAppsDao:InstalledMortaAppsDao

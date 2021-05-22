@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         val repository = AppRepository(application.applicationContext)
         @Suppress("DEPRECATION")
         if (android.os.Build.VERSION.SDK_INT < 23) {
+
             val activeNetwork = cm.activeNetworkInfo
             isConnected = activeNetwork?.isConnectedOrConnecting == true
         } else {
@@ -43,12 +44,14 @@ class MainActivity : AppCompatActivity() {
 
         if (isConnected)
             CoroutineScope(Dispatchers.Default).launch { repository.refresh()}
-        else
+        else {
+            CoroutineScope(Dispatchers.Default).launch { repository.refreshOnlyLocal()}
             Toast.makeText(
                 application.applicationContext,
                 "Отсутствует подключение к интернету, приложение работает в оффлайн режиме",
                 Toast.LENGTH_LONG
             ).show()
+        }
 
         val binding =
             DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)

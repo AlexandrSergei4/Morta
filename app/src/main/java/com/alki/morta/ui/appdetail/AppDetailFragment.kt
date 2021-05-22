@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -35,6 +36,8 @@ class AppDetailFragment : Fragment() {
                 if (it != null) {
                     setBaseAppProps(it.applicationName, it.packageName)
                     binding.hasSecurityData.isChecked= true
+                    binding.contactPhone.setText(it.phone, TextView.BufferType.EDITABLE)
+                    binding.contactEmail.setText(it.email,TextView.BufferType.EDITABLE)
                     binding.howRestoreInfo.text = it.howRestoreInfo
                     binding.howToBlockInfo.text = it.howBlockInfo
                     binding.threatTypes.selectedThreatTypes = it.threatTypes.split(",").map { it.trim() }

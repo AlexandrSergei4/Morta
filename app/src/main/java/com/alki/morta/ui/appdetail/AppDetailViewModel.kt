@@ -6,7 +6,7 @@ import com.alki.morta.db.getDatabase
 
 class AppDetailViewModel(val app: Application, val packageName: String) : AndroidViewModel(app) {
 
-    val db = getDatabase(app.applicationContext)
+    private val db = getDatabase(app.applicationContext)
     var hasSecurityInfo = MutableLiveData<Boolean>()
     val mortaAppDb = db.installedMortaAppsDao.getById(packageName)
     val installedAppDb = db.installedAppsDao.getById(packageName)

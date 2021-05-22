@@ -107,6 +107,26 @@
             android:enabled="false"
             app:layout_constraintStart_toStartOf="@+id/app_icon"
             app:layout_constraintTop_toBottomOf="@+id/app_icon" />
+
+        <EditText
+            android:id="@+id/contact_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="phone"
+            app:layout_constraintStart_toStartOf="@+id/how_to_block_info_label"
+            app:layout_constraintTop_toBottomOf="@+id/how_restore_info" />
+
+        <EditText
+            android:id="@+id/contact_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            app:layout_constraintStart_toStartOf="@+id/contact_phone"
+            app:layout_constraintTop_toBottomOf="@+id/contact_phone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

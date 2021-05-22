@@ -9,8 +9,8 @@ android {
         applicationId "com.alki.morta"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 1.1
+        versionName "1.1"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
@@ -89,7 +89,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     // Room dependency
-    def room_version = "2.3.0"
+    def room_version = "2.4.0-alpha02"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 

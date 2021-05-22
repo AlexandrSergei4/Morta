@@ -7,6 +7,7 @@ data class MortaAppDto(
         val activityName: String,
         val description: String,
         val threatTypeMask: Int,
+        val link:String?,
         val email: String,
         val phone: String,
         val howBlockInfo: String,

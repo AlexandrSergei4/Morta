@@ -19,7 +19,8 @@ class AppDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        Log.d("APPDETAILFRAGMENT", "onCreateView ")
         binding = AppDetailFragmentBinding.inflate(inflater, container,false)
         val packageName = AppDetailFragmentArgs.fromBundle(requireArguments()).packageName
         viewModel = ViewModelProvider(this, AppDetailViewModel.Factory(requireActivity().application,packageName)).get(AppDetailViewModel::class.java)
@@ -28,6 +29,8 @@ class AppDetailFragment : Fragment() {
         Observer {
             if (it != null) {
                 setBaseAppProps(it.applicationName, it.packageName)
+                binding.hasSecurityData.isChecked= false
+
             }
         })
 

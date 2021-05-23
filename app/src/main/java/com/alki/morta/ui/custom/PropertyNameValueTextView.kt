@@ -36,7 +36,7 @@ class PropertyNameValueTextView(context: Context, attrs: AttributeSet) :
                 this@PropertyNameValueTextView.name =
                     getString(R.styleable.PropertyNameValueTextView_label_text)
                 this@PropertyNameValueTextView.autolink =
-                    getString(R.styleable.PropertyNameValueTextView_android_autoLink)
+                    getString(R.styleable.PropertyNameValueTextView_autoLink)
             } finally {
                 recycle()
             }
@@ -53,7 +53,7 @@ class PropertyNameValueTextView(context: Context, attrs: AttributeSet) :
         this.addView(nameTextView);
         this.addView(valueTextView);
         nameTextView.text = name
-        valueTextView.autoLinkMask = autolink.let {
+        val autolinkMask = autolink.let {
             when (it) {
                 "phone" -> Linkify.PHONE_NUMBERS
                 "email" -> Linkify.EMAIL_ADDRESSES
@@ -61,6 +61,7 @@ class PropertyNameValueTextView(context: Context, attrs: AttributeSet) :
                 else -> 0
             }
         }
+        valueTextView.autoLinkMask =autolinkMask
         this.visibility = GONE;
     }
 

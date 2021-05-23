@@ -2,6 +2,6 @@
 <resources>
     <declare-styleable name="PropertyNameValueTextView">
         <attr name="label_text" format="string"/>
-        <attr name="android:autoLink"/>
+        <attr name="autoLink" format="string"/>
     </declare-styleable>
 </resources>

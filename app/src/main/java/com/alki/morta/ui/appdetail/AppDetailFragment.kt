@@ -37,7 +37,7 @@ class AppDetailFragment : Fragment() {
                     setBaseAppProps(it.applicationName, it.packageName)
                     binding.hasSecurityData.isChecked= true
                     binding.contactPhone.value = it.phone
-                    binding.contactEmail.value = it.phone
+                    binding.contactEmail.value = it.email
                     binding.link.value = it.link
                     binding.howToBlockInfo.text = it.howBlockInfo
                     binding.threatTypes.selectedThreatTypes = it.threatTypes.split(",").map { it.trim() }

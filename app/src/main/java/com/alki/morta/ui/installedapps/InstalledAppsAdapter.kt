@@ -1,6 +1,8 @@
 package com.alki.morta.ui.installedapps
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,6 +19,9 @@ class InstalledAppsAdapter(private val clickListener: AppClickListener) :
 
         fun bind(app: App, clickListener: AppClickListener) {
             binding.app = app
+            binding.itemContainer.setOnClickListener(View.OnClickListener {
+                clickListener.onClick(app.packageName)
+            })
         }
     }
 

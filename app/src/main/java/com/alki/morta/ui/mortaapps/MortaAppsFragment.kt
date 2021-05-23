@@ -34,9 +34,7 @@ class MortaAppsFragment : Fragment() {
             Observer {
                 if (it != null) {
                     findNavController().navigate(
-                        MortaAppsFragmentDirections.actionSensitiveAppsToAppDetailFragment(
-                            it
-                        )
+                        MortaAppsFragmentDirections.actionSensitiveAppsToAppDetailFragment(it)
                     )
                     viewModel.navigationDone()
                 }

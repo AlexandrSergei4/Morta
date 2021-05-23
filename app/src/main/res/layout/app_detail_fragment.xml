@@ -50,8 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
-            android:text="Как заблокировать доступ:"
+            android:visibility="@{viewModel.hasSecurityInfo ? 0x00000000 : 0x00000008}"
+            android:text="@string/how_to_block_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/threatTypes" />
 
@@ -61,31 +61,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
+            android:visibility="@{viewModel.hasSecurityInfo ? 0x00000000 : 0x00000008}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/how_to_block_info_label"
             app:layout_constraintTop_toBottomOf="@+id/how_to_block_info_label" />
-
-        <TextView
-            android:id="@+id/how_to_restore_info_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
-            android:text="@string/how_to_restore_label"
-            app:layout_constraintStart_toStartOf="@+id/how_to_block_info"
-            app:layout_constraintTop_toBottomOf="@+id/how_to_block_info" />
-
-        <TextView
-            android:id="@+id/how_restore_info"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/how_to_restore_info_label"
-            app:layout_constraintTop_toBottomOf="@+id/how_to_restore_info_label" />
 
         <com.alki.morta.ui.custom.ThreatTypesView
             android:id="@+id/threatTypes"
@@ -93,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
+            android:visibility="@{viewModel.hasSecurityInfo ? 0x00000000 : 0x00000008}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/has_security_data" />
@@ -102,11 +81,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Личные данные"
+            android:text="@string/has_security_data_label"
             android:checked="@={viewModel.hasSecurityInfo}"
-            android:enabled="false"
             app:layout_constraintStart_toStartOf="@+id/app_icon"
             app:layout_constraintTop_toBottomOf="@+id/app_icon" />
+
+        <com.alki.morta.ui.custom.PropertyNameValueTextView
+            android:id="@+id/contact_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:autoLink="email"
+            app:label_text="E-mail"
+            android:visibility="@{viewModel.hasSecurityInfo ? 0x00000000 : 0x00000008}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/how_to_block_info"
+            app:layout_constraintTop_toBottomOf="@+id/contact_phone" />
+
+        <com.alki.morta.ui.custom.PropertyNameValueTextView
+            android:id="@+id/contact_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:autoLink="phone"
+            app:label_text="Телефон"
+            android:visibility="@{viewModel.hasSecurityInfo ? 0x00000000 : 0x00000008}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/how_to_block_info"
+            app:layout_constraintTop_toBottomOf="@+id/how_to_block_info" />
+
+        <com.alki.morta.ui.custom.PropertyNameValueTextView
+            android:id="@+id/link"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:autoLink="web"
+            app:label_text="Подробнее"
+            android:visibility="@{viewModel.hasSecurityInfo ? 0x00000000 : 0x00000008}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/how_to_block_info"
+            app:layout_constraintTop_toBottomOf="@+id/contact_email" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

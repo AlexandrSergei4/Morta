@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alki.morta.databinding.InstalledAppsFragmentBinding
 import com.alki.morta.ui.appdetail.AppClickListener
+import com.alki.morta.ui.mortaapps.MortaAppsFragmentDirections
 
 class InstalledAppsFragment : Fragment() {
 
@@ -28,14 +30,17 @@ class InstalledAppsFragment : Fragment() {
         binding.installedAppsRecycleView.adapter = InstalledAppsAdapter(AppClickListener { viewModel.onClickAppItem(it)})
         binding.viewModel = viewModel
 
-        viewModel.navigateToMortaAppDetail.observe(viewLifecycleOwner,
-            {
-                findNavController().navigate(
-                    InstalledAppsFragmentDirections.actionInstalledAppsToAppDetailFragment(
-                        it
+        viewModel.navigateToMortaAppDetail.observe(
+            viewLifecycleOwner,
+            Observer{
+                if (it!=null) {
+                    findNavController().navigate(
+                        InstalledAppsFragmentDirections.actionInstalledAppsToAppDetailFragment(it)
                     )
-                )
-            })
+                    viewModel.navigationDone()
+                }
+            }
+        )
 
         return binding.root
     }

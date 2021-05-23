@@ -31,10 +31,23 @@ class AppRepository(private val context: Context) {
      */
     val installedApps = database.installedAppsDao.getAllLiveData()
 
+    /**
+     * Вызывать либо refresh, либо refreshOnlyLocal
+     */
     suspend fun refresh() {
         Timber.d("Refreshing repository")
         withContext(Dispatchers.IO) {
             refreshFromInternet()
+            refreshLocalApps()
+        }
+    }
+
+    /**
+     * Вызывать либо refresh, либо refreshOnlyLocal
+     */
+    suspend fun refreshOnlyLocal() {
+        Timber.d("Refreshing repository local")
+        withContext(Dispatchers.IO) {
             refreshLocalApps()
         }
     }
@@ -62,6 +75,7 @@ class AppRepository(private val context: Context) {
                         it.activityName,
                         it.description,
                         it.threatTypeMask,
+                        it.link,
                         it.email,
                         it.phone,
                         it.howBlockInfo,
@@ -115,6 +129,7 @@ class AppRepository(private val context: Context) {
                 it.threatTypesMask,
                 threatAndSeverity.threat,
                 threatAndSeverity.severity,
+                it.link,
                 it.email,
                 it.phone,
                 it.howBlockInfo,

@@ -3,6 +3,8 @@ package com.alki.morta.db
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Dao
 interface ThreatTypesDao {
@@ -84,15 +86,31 @@ interface InstalledMortaAppsDao {
 
 }
 
-@Database(entities = [MortaAppDb::class, InstalledMortaAppDb::class,
-    ThreatTypeDb::class, ApplicationDataVersion::class,
-    InstalledAppDb::class], exportSchema = false, version = 1)
+@Database
+    (
+    entities = [MortaAppDb::class, InstalledMortaAppDb::class,
+        ThreatTypeDb::class, ApplicationDataVersion::class,
+        InstalledAppDb::class],
+    version = 2,
+    autoMigrations = [
+        AutoMigration(from = 1,to = 2)
+    ],
+    exportSchema = true
+)
 abstract class MortaDatabase:RoomDatabase(){
     abstract val mortaAppsDao:MortaAppsDao
     abstract val installedMortaAppsDao:InstalledMortaAppsDao
     abstract val installedAppsDao:InstalledAppsDao
     abstract val threatTypesDao:ThreatTypesDao
     abstract val versionDao:VersionDao
+}
+
+val MIGRATION_1_2 = object: Migration(1,2){
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(MIGR_INSTALLED_MORTA_APP_1_2)
+        database.execSQL(MIGR_MORTA_APP_DB_1_2)
+    }
+
 }
 
 private lateinit var INSTANCE:MortaDatabase
@@ -104,7 +122,7 @@ fun getDatabase(context: Context):MortaDatabase{
         {
             INSTANCE = Room.databaseBuilder(context.applicationContext,
                 MortaDatabase::class.java,
-            "morta").build()
+            "morta").addMigrations(MIGRATION_1_2).build()
         }
         return INSTANCE
     }

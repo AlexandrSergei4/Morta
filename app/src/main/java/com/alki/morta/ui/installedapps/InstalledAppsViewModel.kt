@@ -7,8 +7,8 @@ import com.alki.morta.domain.AppRepository
 
 class InstalledAppsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _navigateToMortaAppDetail= MutableLiveData<String>()
-    val navigateToMortaAppDetail:LiveData<String> get() = _navigateToMortaAppDetail
+    private val _navigateToMortaAppDetail= MutableLiveData<String?>()
+    val navigateToMortaAppDetail:LiveData<String?> get() = _navigateToMortaAppDetail
 
     private val repository = AppRepository(application.applicationContext)
     private var _installedAppList  = Transformations.map(repository.installedApps)

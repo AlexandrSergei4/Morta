@@ -66,27 +66,6 @@
             app:layout_constraintStart_toStartOf="@+id/how_to_block_info_label"
             app:layout_constraintTop_toBottomOf="@+id/how_to_block_info_label" />
 
-        <TextView
-            android:id="@+id/how_to_restore_info_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
-            android:text="@string/how_to_restore_label"
-            app:layout_constraintStart_toStartOf="@+id/how_to_block_info"
-            app:layout_constraintTop_toBottomOf="@+id/how_to_block_info" />
-
-        <TextView
-            android:id="@+id/how_restore_info"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="@{viewModel.hasSecurityInfo ? 0 : 1}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/how_to_restore_info_label"
-            app:layout_constraintTop_toBottomOf="@+id/how_to_restore_info_label" />
-
         <com.alki.morta.ui.custom.ThreatTypesView
             android:id="@+id/threatTypes"
             android:layout_width="0dp"
@@ -108,25 +87,42 @@
             app:layout_constraintStart_toStartOf="@+id/app_icon"
             app:layout_constraintTop_toBottomOf="@+id/app_icon" />
 
-        <EditText
-            android:id="@+id/contact_phone"
-            android:layout_width="wrap_content"
+        <com.alki.morta.ui.custom.PropertyNameValueTextView
+            android:id="@+id/contact_email"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:ems="10"
-            android:inputType="phone"
-            app:layout_constraintStart_toStartOf="@+id/how_to_block_info_label"
-            app:layout_constraintTop_toBottomOf="@+id/how_restore_info" />
-
-        <EditText
-            android:id="@+id/contact_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            app:layout_constraintStart_toStartOf="@+id/contact_phone"
+            android:layout_marginEnd="8dp"
+            android:autoLink="email"
+            app:label_text="E-mail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/how_to_block_info"
             app:layout_constraintTop_toBottomOf="@+id/contact_phone" />
+
+        <com.alki.morta.ui.custom.PropertyNameValueTextView
+            android:id="@+id/contact_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:autoLink="phone"
+            app:label_text="Телефон"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/how_to_block_info"
+            app:layout_constraintTop_toBottomOf="@+id/how_to_block_info" />
+
+        <com.alki.morta.ui.custom.PropertyNameValueTextView
+            android:id="@+id/link"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:autoLink="email"
+            app:label_text="Подробнее"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/how_to_block_info"
+            app:layout_constraintTop_toBottomOf="@+id/contact_email" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

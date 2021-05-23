@@ -36,9 +36,9 @@ class AppDetailFragment : Fragment() {
                 if (it != null) {
                     setBaseAppProps(it.applicationName, it.packageName)
                     binding.hasSecurityData.isChecked= true
-                    binding.contactPhone.setText(it.phone, TextView.BufferType.EDITABLE)
-                    binding.contactEmail.setText(it.email,TextView.BufferType.EDITABLE)
-                    binding.howRestoreInfo.text = it.howRestoreInfo
+                    binding.contactPhone.value = it.phone
+                    binding.contactEmail.value = it.phone
+                    binding.link.value = it.link
                     binding.howToBlockInfo.text = it.howBlockInfo
                     binding.threatTypes.selectedThreatTypes = it.threatTypes.split(",").map { it.trim() }
 

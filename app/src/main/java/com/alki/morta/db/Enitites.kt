@@ -1,6 +1,8 @@
 package com.alki.morta.db
 
 import androidx.room.*
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 /**
  * Хранение типов личной информации
@@ -27,6 +29,7 @@ data class MortaAppDb(
     val howBlockInfo: String,
     val howRestoreInfo: String)
 
+val MIGR_MORTA_APP_DB_1_2 = "ALTER TABLE MortaAppDb ADD COLUMN link TEXT"
 /**
  * Хранение установленных приложений содержащих личные данные
  */
@@ -44,6 +47,8 @@ data class InstalledMortaAppDb(
     val phone: String,
     val howBlockInfo: String,
     val howRestoreInfo: String)
+
+val MIGR_INSTALLED_MORTA_APP_1_2 = "ALTER TABLE InstalledMortaAppDb ADD COLUMN link TEXT"
 
 /**
  * Хранение установленных приложений

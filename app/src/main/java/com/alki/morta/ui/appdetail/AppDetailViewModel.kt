@@ -1,13 +1,14 @@
 package com.alki.morta.ui.appdetail
 
 import android.app.Application
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.*
 import com.alki.morta.db.getDatabase
 
 class AppDetailViewModel(val app: Application, val packageName: String) : AndroidViewModel(app) {
 
     private val db = getDatabase(app.applicationContext)
-    var hasSecurityInfo = MutableLiveData<Boolean>()
+    var hasSecurityInfo = ObservableBoolean()
     val mortaAppDb = db.installedMortaAppsDao.getById(packageName)
     val installedAppDb = db.installedAppsDao.getById(packageName)
     val allThreatTypes = db.threatTypesDao.getAllLiveData()

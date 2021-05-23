@@ -65,4 +65,10 @@ class PropertyNameValueTextView(context: Context, attrs: AttributeSet) :
         this.visibility = GONE;
     }
 
+    override fun setVisibility(visibility: Int) {
+        var v = visibility;
+        if (value == null || this.value?.isEmpty() != false)
+            v = GONE
+        super.setVisibility(v)
+    }
 }

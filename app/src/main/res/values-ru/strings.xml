@@ -10,4 +10,5 @@
     <string name="how_to_restore_label">Как восстановить доступ:</string>
     <string name="application_icon">Иконка приложения</string>
     <string name="application_details">Сведения о приложении</string>
+    <string name="has_security_data_label">Личные данные</string>
 </resources>

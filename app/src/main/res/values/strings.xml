@@ -10,4 +10,6 @@
     <string name="how_to_restore_label">How to restore access</string>
     <string name="application_icon">Application Icon</string>
     <string name="application_details">Application details</string>
+    <string name="has_security_data_label">Has Security Data</string>
+    <string name="how_to_block_label">Как заблокировать доступ:</string>
 </resources>

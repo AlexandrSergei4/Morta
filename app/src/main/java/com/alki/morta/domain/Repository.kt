@@ -35,7 +35,6 @@ class AppRepository(private val context: Context) {
      * Вызывать либо refresh, либо refreshOnlyLocal
      */
     suspend fun refresh() {
-        Timber.d("Refreshing repository")
         withContext(Dispatchers.IO) {
             refreshFromInternet()
             refreshLocalApps()
@@ -46,7 +45,6 @@ class AppRepository(private val context: Context) {
      * Вызывать либо refresh, либо refreshOnlyLocal
      */
     suspend fun refreshOnlyLocal() {
-        Timber.d("Refreshing repository local")
         withContext(Dispatchers.IO) {
             refreshLocalApps()
         }

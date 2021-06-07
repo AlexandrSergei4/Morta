@@ -16,16 +16,3 @@ interface MortaAppService{
     @GET("/threat_types")
     suspend fun getThreatTypes() : List<ThreatTypeDto>
 }
-
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
-
-private val retrofit = Retrofit.Builder()
-    .baseUrl("https://mortaback.herokuapp.com/")
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .build()
-
-object Remote {
-    val mortaService = retrofit.create(MortaAppService::class.java)
-}

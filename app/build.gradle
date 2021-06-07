@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'dagger.hilt.android.plugin'
+
 
 android {
     compileSdkVersion 30
@@ -40,6 +42,7 @@ android {
 }
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -102,6 +105,12 @@ dependencies {
     // WorkManager dependency
     def work_version = "1.0.1"
     implementation "android.arch.work:work-runtime-ktx:$work_version"
+
+    //DI
+
+    implementation 'com.google.dagger:dagger:2.36'
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.0"
 

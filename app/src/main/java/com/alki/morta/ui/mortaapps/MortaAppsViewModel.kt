@@ -6,13 +6,15 @@ import androidx.lifecycle.*
 import com.alki.morta.domain.AppRepository
 import com.alki.morta.domain.MortaApp
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
 class MortaAppsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _navigateToMortaAppDetail= MutableLiveData<String?>()
     val navigateToMortaAppDetail get() = _navigateToMortaAppDetail
 
-    private val repository = AppRepository(application.applicationContext)
+    @Inject lateinit var repository:AppRepository
     val appList  = Transformations.map(repository.installedMortaApps)
     {
         it.map {
@@ -30,7 +32,9 @@ class MortaAppsViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-
+    init {
+        Timber.d("INIT MORTAAPP VIEWMODEl")
+    }
     fun onClickAppItem(app_package:String){
         _navigateToMortaAppDetail.value = app_package
     }
@@ -47,5 +51,6 @@ class MortaAppsViewModel(application: Application) : AndroidViewModel(applicatio
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
+
 
 }

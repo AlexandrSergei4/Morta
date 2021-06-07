@@ -2,19 +2,22 @@ package com.alki.morta.domain
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
-import android.widget.Toast
 import androidx.room.Transaction
 import com.alki.morta.db.*
-import com.alki.morta.network.Remote
+import com.alki.morta.network.MortaAppService
+import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
-import java.lang.RuntimeException
+import javax.inject.Inject
 
-class AppRepository(private val context: Context) {
+class AppRepository
+    @Inject constructor(
+        @ActivityContext private val context: Context,
+        @Inject private val mortaService:MortaAppService
+    )
+{
     private val database = getDatabase(context)
     private val packageManager = context.packageManager;
     private val getAppsIntent = Intent(Intent.ACTION_MAIN)
@@ -57,9 +60,9 @@ class AppRepository(private val context: Context) {
     private suspend fun refreshFromInternet() {
         val currentDataVersion = database.versionDao.getCurrentVersion()
         try {
-            val remoteVersion = Remote.mortaService.getAppVersion()
+            val remoteVersion = mortaService.getAppVersion()
             if (currentDataVersion < remoteVersion) {
-                val threatTypesDto = Remote.mortaService.getThreatTypes();
+                val threatTypesDto = mortaService.getThreatTypes();
                 val threatTypes = threatTypesDto.map {
                     ThreatTypeDb(
                         it.mask,
@@ -68,7 +71,7 @@ class AppRepository(private val context: Context) {
                     )
                 }
                 database.threatTypesDao.insertAll(threatTypes)
-                val mortaApps = Remote.mortaService.getMortaApps().map {
+                val mortaApps = mortaService.getMortaApps().map {
                     MortaAppDb(
                         it.activityName,
                         it.description,
@@ -84,16 +87,16 @@ class AppRepository(private val context: Context) {
                 database.versionDao.insert(ApplicationDataVersion(remoteVersion))
             }
         } catch (e: IOException) {
-            Toast.makeText(
-                context, "Не удается получить данные. Проверьте подключение к интернету.",
-                Toast.LENGTH_LONG
-            ).show()
+//            Toast.makeText(
+//                context, "Не удается получить данные. Проверьте подключение к интернету.",
+//                Toast.LENGTH_LONG
+//            ).show()
         } catch (e: HttpException) {
-            Toast.makeText(
-                context,
-                "Не удалось получить данные. Проверьте подключение к интернету.",
-                Toast.LENGTH_LONG
-            ).show()
+//            Toast.makeText(
+//                context,
+//                "Не удалось получить данные. Проверьте подключение к интернету.",
+//                Toast.LENGTH_LONG
+//            ).show()
         }
     }
 

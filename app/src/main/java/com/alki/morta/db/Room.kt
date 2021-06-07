@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import javax.inject.Inject
 
 @Dao
 interface ThreatTypesDao {
@@ -115,6 +116,7 @@ val MIGRATION_1_2 = object: Migration(1,2){
 
 private lateinit var INSTANCE:MortaDatabase
 
+@Inject
 fun getDatabase(context: Context):MortaDatabase{
     synchronized(MortaDatabase::class.java)
     {

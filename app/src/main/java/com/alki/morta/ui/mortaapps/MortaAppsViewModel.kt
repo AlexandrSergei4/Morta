@@ -1,20 +1,20 @@
 package com.alki.morta.ui.mortaapps
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.alki.morta.domain.AppRepository
 import com.alki.morta.domain.MortaApp
-import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
+
+//import javax.inject.Inject
 
 class MortaAppsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _navigateToMortaAppDetail= MutableLiveData<String?>()
     val navigateToMortaAppDetail get() = _navigateToMortaAppDetail
 
-    @Inject lateinit var repository:AppRepository
+//    @Inject
+    lateinit var repository:AppRepository
     val appList  = Transformations.map(repository.installedMortaApps)
     {
         it.map {

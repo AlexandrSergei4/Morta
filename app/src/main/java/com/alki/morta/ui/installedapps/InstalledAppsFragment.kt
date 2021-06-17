@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alki.morta.databinding.InstalledAppsFragmentBinding
 import com.alki.morta.ui.appdetail.AppClickListener
-import com.alki.morta.ui.mortaapps.MortaAppsFragmentDirections
 
 class InstalledAppsFragment : Fragment() {
 

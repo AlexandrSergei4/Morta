@@ -21,12 +21,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navController: NavController
-    @Inject lateinit var repository: AppRepository;
+//    @Inject
+    lateinit var repository: AppRepository;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

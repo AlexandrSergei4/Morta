@@ -1,7 +1,6 @@
 package com.alki.morta.ui.installedapps
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.alki.morta.domain.App
 import com.alki.morta.domain.AppRepository

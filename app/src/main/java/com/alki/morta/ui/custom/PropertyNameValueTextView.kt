@@ -6,8 +6,6 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.updateLayoutParams
 import com.alki.morta.R
 
 class PropertyNameValueTextView(context: Context, attrs: AttributeSet) :

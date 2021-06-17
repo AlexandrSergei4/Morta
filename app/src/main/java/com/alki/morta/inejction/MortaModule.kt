@@ -1,6 +1,5 @@
 package com.alki.morta.inejction
 
-import android.content.Context
 import com.alki.morta.network.MortaAppService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

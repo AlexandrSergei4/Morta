@@ -2,20 +2,28 @@ package com.alki.morta.domain
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.room.Transaction
 import com.alki.morta.db.*
-import com.alki.morta.network.Remote
+import com.alki.morta.network.MortaAppService
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
-import java.lang.RuntimeException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AppRepository(private val context: Context) {
-    private val database = getDatabase(context)
+@Singleton
+class AppRepository
+    @Inject constructor(
+        @ApplicationContext
+        private val context: Context,
+        private val database: MortaDatabase,
+        private val mortaService:MortaAppService
+    )
+{
     private val packageManager = context.packageManager;
     private val getAppsIntent = Intent(Intent.ACTION_MAIN)
         .apply {
@@ -57,9 +65,9 @@ class AppRepository(private val context: Context) {
     private suspend fun refreshFromInternet() {
         val currentDataVersion = database.versionDao.getCurrentVersion()
         try {
-            val remoteVersion = Remote.mortaService.getAppVersion()
+            val remoteVersion = mortaService.getAppVersion()
             if (currentDataVersion < remoteVersion) {
-                val threatTypesDto = Remote.mortaService.getThreatTypes();
+                val threatTypesDto = mortaService.getThreatTypes();
                 val threatTypes = threatTypesDto.map {
                     ThreatTypeDb(
                         it.mask,
@@ -68,7 +76,7 @@ class AppRepository(private val context: Context) {
                     )
                 }
                 database.threatTypesDao.insertAll(threatTypes)
-                val mortaApps = Remote.mortaService.getMortaApps().map {
+                val mortaApps = mortaService.getMortaApps().map {
                     MortaAppDb(
                         it.activityName,
                         it.description,

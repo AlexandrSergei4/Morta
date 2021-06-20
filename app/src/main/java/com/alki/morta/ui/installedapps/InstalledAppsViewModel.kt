@@ -1,16 +1,24 @@
 package com.alki.morta.ui.installedapps
 
-import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.alki.morta.domain.App
 import com.alki.morta.domain.AppRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class InstalledAppsViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class InstalledAppsViewModel
+@Inject constructor(
+    repository: AppRepository
+) : ViewModel() {
 
     private val _navigateToMortaAppDetail= MutableLiveData<String?>()
     val navigateToMortaAppDetail:LiveData<String?> get() = _navigateToMortaAppDetail
 
-    private val repository = AppRepository(application.applicationContext)
+
     private var _installedAppList  = Transformations.map(repository.installedApps)
     {
         it.map {
@@ -29,14 +37,5 @@ class InstalledAppsViewModel(application: Application) : AndroidViewModel(applic
 
     fun navigationDone(){
         _navigateToMortaAppDetail.value = null
-    }
-    class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(InstalledAppsViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return InstalledAppsViewModel(app) as T
-            }
-            throw IllegalArgumentException("Unable to construct InstalledAppsViewModel")
-        }
     }
 }

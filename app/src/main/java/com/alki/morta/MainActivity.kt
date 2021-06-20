@@ -3,7 +3,6 @@ package com.alki.morta
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -15,21 +14,26 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.alki.morta.databinding.ActivityMainBinding
 import com.alki.morta.domain.AppRepository
+import com.alki.morta.network.MortaAppService
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navController: NavController
+    @Inject lateinit var repository: AppRepository;
+    @Inject lateinit var service: MortaAppService;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val isConnected: Boolean
         val cm = application.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val repository = AppRepository(application.applicationContext)
-        @Suppress("DEPRECATION")
         if (android.os.Build.VERSION.SDK_INT < 23) {
 
             val activeNetwork = cm.activeNetworkInfo

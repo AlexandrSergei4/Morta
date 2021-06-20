@@ -5,24 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alki.morta.databinding.MortaAppsFragmentBinding
 import com.alki.morta.ui.appdetail.AppClickListener
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MortaAppsFragment : Fragment() {
 
-    private lateinit var viewModel: MortaAppsViewModel
+    private val viewModel: MortaAppsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel =
-            ViewModelProvider(this, MortaAppsViewModel.Factory(requireActivity().application)).get(
-                MortaAppsViewModel::class.java)
         val binding = MortaAppsFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel

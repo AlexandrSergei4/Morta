@@ -1,18 +1,22 @@
 package com.alki.morta.ui.mortaapps
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.alki.morta.domain.AppRepository
 import com.alki.morta.domain.MortaApp
-import kotlinx.coroutines.launch
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MortaAppsViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class MortaAppsViewModel
+@Inject constructor(
+    repository: AppRepository
+    ) : ViewModel() {
 
     private val _navigateToMortaAppDetail= MutableLiveData<String?>()
     val navigateToMortaAppDetail get() = _navigateToMortaAppDetail
 
-    private val repository = AppRepository(application.applicationContext)
     val appList  = Transformations.map(repository.installedMortaApps)
     {
         it.map {
@@ -37,15 +41,6 @@ class MortaAppsViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun navigationDone(){
         _navigateToMortaAppDetail.value = null
-    }
-    class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(MortaAppsViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return MortaAppsViewModel(app) as T
-            }
-            throw IllegalArgumentException("Unable to construct viewmodel")
-        }
     }
 
 }
